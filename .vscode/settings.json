@@ -1,0 +1,11 @@
+{
+    "C_Cpp.intelliSenseEngine": "default",
+    "slint.preview.providedByEditor": true,
+    "C_Cpp.sourceFileMap": {
+        "${workspaceFolder}/build/CMakeFiles/app.dir": "${workspaceFolder}/app"
+    },
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
+    "[cpp]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools"
+    }
+}

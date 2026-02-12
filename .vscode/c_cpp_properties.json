@@ -1,0 +1,36 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/app/src",
+                "${workspaceFolder}/app",
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/build",
+                "${workspaceFolder}/build/app",
+                "${workspaceFolder}/build/app/zephyr/include/generated/zephyr",
+                "${workspaceFolder}/build/app/zephyr/include/generated",
+                "${workspaceFolder}/build/app/slint_build/api/cpp/generated_include",
+                "${workspaceFolder}/../zephyr/include",
+                "${workspaceFolder}/../zephyr/soc/native/inf_clock",
+                "${workspaceFolder}/../zephyr/boards/native/native_sim",
+                "${workspaceFolder}/../zephyr/scripts/native_simulator/common/src/include",
+                "${workspaceFolder}/../zephyr/scripts/native_simulator/native/src/include",
+                "${workspaceFolder}/../zephyr/kernel/include",
+                "${workspaceFolder}/../zephyr/arch/posix/include",
+                "${workspaceFolder}/../modules/slint-ui/api/cpp/include",
+                "${workspaceFolder}/../modules/slint-ui/demos/zephyr-common"
+            ],
+            "defines": [
+                "KERNEL",
+                "K_HEAP_MEM_POOL_SIZE=512",
+                "__ZEPHYR__=1"
+            ],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c17",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}

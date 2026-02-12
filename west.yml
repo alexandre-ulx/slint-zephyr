@@ -1,0 +1,25 @@
+manifest:
+  remotes:
+    - name: zephyrproject-rtos
+      url-base: https://github.com/zephyrproject-rtos
+
+    # slint organization public repositories
+    - name: slint
+      # Is possible you import from local path, use url-base: /path/to
+      url-base: https://github.com/slint-ui
+
+  projects:
+    - name: zephyr
+      remote: zephyrproject-rtos
+      revision: v4.3.0
+      import:
+        name-allowlist:
+          - cmsis_6
+          - hal_stm32
+          - mcuboot
+
+    # slint import for workspace synchronization
+    - name: slint
+      path: modules/slint-ui
+      remote: slint
+      revision: master

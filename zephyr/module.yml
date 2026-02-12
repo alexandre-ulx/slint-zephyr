@@ -1,0 +1,8 @@
+build:
+  kconfig: Kconfig
+  cmake: .
+  settings:
+    board_root: .
+    dts_root: .
+# runners:
+#   - file: scripts/slint.py

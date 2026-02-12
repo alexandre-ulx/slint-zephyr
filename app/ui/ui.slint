@@ -1,0 +1,40 @@
+import { HorizontalBox, VerticalBox, Button, ScrollView } from "std-widgets.slint";
+
+export component MainWindow inherits Window {
+    default-font-family: "DejaVu Sans Mono";
+    default-font-weight: 500;
+    width: 800px;
+    height: 400px;
+    background: #ffffff;
+
+    VerticalBox {
+        Text {
+            text: "Hello World !";
+            font-size: 48px;
+            color: black;
+            vertical-alignment: center;
+            horizontal-alignment: center;
+        }
+
+        HorizontalBox {
+            alignment: center;
+            Rectangle {
+                width: 100px;
+                height: 100px;
+                background: red;
+            }
+
+            Rectangle {
+                width: 100px;
+                height: 100px;
+                background: green;
+            }
+
+            Rectangle {
+                width: 100px;
+                height: 100px;
+                background: blue;
+            }
+        }
+    }
+}

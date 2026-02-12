@@ -1,0 +1,162 @@
+/ {
+	chosen {
+		// zephyr,flash = &ext_flash;
+		// zephyr,flash-controller = &ext_flash_ctrl;
+		// zephyr,code-partition = &slot0_partition;
+		zephyr,touch = &gt911_lcd_par_s035;
+	};
+};
+
+&ltdc {
+	pinctrl-0 = <&ltdc_r0_pi15 &ltdc_r1_pj0 &ltdc_r2_pj1 &ltdc_r3_ph9
+		     &ltdc_r4_pj3 &ltdc_r5_pj4 &ltdc_r6_pj5 &ltdc_r7_pj6
+		     &ltdc_g0_pj7 &ltdc_g1_pj8 &ltdc_g2_pj9 &ltdc_g3_pj10
+		     &ltdc_g4_pj11 &ltdc_g5_pi0 &ltdc_g6_pi1 &ltdc_g7_pk2
+		     &ltdc_b0_pj12 &ltdc_b1_pj13 &ltdc_b2_pj14 &ltdc_b3_pj15
+		     &ltdc_b4_pk3 &ltdc_b5_pk4 &ltdc_b6_pk5 &ltdc_b7_pk6
+		     &ltdc_de_pk7 &ltdc_clk_pi14 &ltdc_hsync_pi12 &ltdc_vsync_pi9>;
+	pinctrl-names = "default";
+
+	disp-on-gpios = <&gpiod 7 GPIO_ACTIVE_HIGH>;
+
+	ext-sdram = <&sdram2>;
+	status = "okay";
+
+	clocks = <&rcc STM32_CLOCK(APB3, 3)>,
+		 <&rcc STM32_SRC_PLL3_R NO_SEL>;
+
+	width = <480>;
+	height = <272>;
+	pixel-format = <PANEL_PIXEL_FORMAT_RGB_888>;  /* RGB 16-bit */
+
+	display-timings {
+		compatible = "zephyr,panel-timing";
+		de-active = <1>;
+		pixelclk-active = <0>;
+		hsync-active = <0>;
+		vsync-active = <0>;
+
+		hsync-len = <4>;
+		hback-porch = <40>;
+		hfront-porch = <8>;
+
+		vsync-len = <4>;
+		vback-porch = <8>;
+		vfront-porch = <8>;
+	};
+
+	def-back-color-red = <0x00>;
+	def-back-color-green = <0x00>;
+	def-back-color-blue = <0x00>;
+};
+
+&pll3 {
+	div-m = <5>;
+	mul-n = <192>;
+	div-p = <2>;
+	div-q = <20>;
+	div-r = <111>;
+	clocks = <&clk_hse>;
+	status = "okay";
+};
+
+// &flash0 {
+// 	status = "okay";
+
+// 	partitions {
+// 		compatible = "fixed-partitions";
+// 		#address-cells = <1>;
+// 		#size-cells = <1>;
+
+// 		/* Flash has 128KB sector size */
+// 		boot_partition: partition@0 {
+// 			label = "mcuboot";
+// 			reg = <0x00000000 DT_SIZE_K(128)>;
+// 		};
+// 	};
+// };
+
+// &quadspi {
+// 	pinctrl-names = "default";
+// 	pinctrl-0 = <&quadspi_clk_pf10 &quadspi_bk1_ncs_pg6
+// 		     &quadspi_bk1_io0_pd11 &quadspi_bk1_io1_pf9
+// 		     &quadspi_bk1_io2_pf7 &quadspi_bk1_io3_pf6
+// 		     &quadspi_bk2_io0_ph2 &quadspi_bk2_io1_ph3
+// 		     &quadspi_bk2_io2_pg9 &quadspi_bk2_io3_pg14>;
+// 	/*
+// 	 * Two MT25QL512AB NOR Flash chips connected to QSPI in parallel
+// 	 * and accessed simultaneously, 4bits sent to/received from each.
+// 	 */
+// 	dual-flash;
+// 	ssht-enable;
+// 	status = "okay";
+
+// 	ext_flash_ctrl: qspi-flash-controller@0 {
+// 		compatible = "st,stm32-qspi-nor";
+// 		reg = <0>;
+// 		size = <DT_SIZE_M(512)>; /* 64MB for each Flash */
+// 		qspi-max-frequency = <72000000>;
+// 		cs-high-time = <4>; /* >= 50 ns */
+// 		spi-bus-width = <4>;
+// 		reset-cmd;
+// 		status = "okay";
+
+// 		#address-cells = <1>;
+// 		#size-cells = <1>;
+// 		ranges = <0x0 0x90000000 DT_SIZE_M(128)>; /* Ext Flash mem-mapped to 0x90000000 */
+
+// 		/* Sector erase 64KB uniform granularity for each Flash */
+// 		/* Subsector erase 4KB, 32KB granularity for each Flash */
+// 		ext_flash: mt25ql512ab: ext-flash@0 {
+// 			compatible = "soc-nv-flash";
+// 			reg = <0x0 DT_SIZE_M(128)>; /* 128MB total in dual-flash mode */
+// 			write-block-size = <1>; /* 1byte=4bits*2 in dual-flash mode */
+// 			erase-block-size = <DT_SIZE_K(8)>; /* 4KB*2 in dual-flash mode */
+
+// 			partitions {
+// 				compatible = "fixed-partitions";
+// 				#address-cells = <1>;
+// 				#size-cells = <1>;
+// 			};
+// 		};
+// 	};
+// };
+
+// &ext_flash {
+// 	status = "okay";
+
+// 	partitions {
+// 		slot0_partition: partition@0 {
+// 			label = "image-0";
+// 			reg = <0x0 DT_SIZE_M(60)>; /* 60MB */
+// 		};
+
+// 		slot1_partition: partition@3c00000 {
+// 			label = "image-1";
+// 			reg = <0x3c00000 DT_SIZE_M(60)>;
+// 		};
+
+// 		storage_partition: partition@7800000 {
+// 			label = "storage";
+// 			reg = <0x7800000 DT_SIZE_M(8)>;
+// 		};
+// 	};
+// };
+
+&i2c4 {
+	pinctrl-0 = <&i2c4_scl_pd12 &i2c4_sda_pd13>;
+	pinctrl-names = "default";
+	clock-frequency = <I2C_BITRATE_FAST>;
+	status = "okay";
+
+	gt911_lcd_par_s035: gt911-lcd_par_s035@1A {
+		compatible = "goodix,gt911";
+		reg = <0x1A>;
+		irq-gpios = <&gpiog 2 GPIO_ACTIVE_HIGH>;
+		// zephyr,deferred-init;
+		// swapped-x-y;
+		// inverted-x;
+		// screen-width = <400>;
+		// screen-height = <272>;
+	};
+};
